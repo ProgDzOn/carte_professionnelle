@@ -1,6 +1,4 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
 <meta charset="UTF-8">
@@ -21,7 +19,7 @@ h1{font-size:clamp(2.2rem,6vw,3.9rem);line-height:1.12;margin:10px 0;letter-spac
 h2{font-size:1.1rem;margin:0 0 16px;color:var(--navy);display:flex;align-items:center;gap:10px}h2:before{content:"";width:4px;height:19px;border-radius:5px;background:var(--gold)}p{margin:0;color:#526176}
 .timeline{display:grid;gap:17px}.item{border-inline-start:2px solid #ead9b8;padding-inline-start:16px;position:relative}.item:before{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:var(--gold);inset-inline-start:-5.5px;top:7px}.item h3{margin:0;color:#22324c;font-size:.96rem}.meta{color:var(--muted);font-size:.81rem;margin:3px 0 6px}.item p{font-size:.88rem}
 .tags{display:flex;flex-wrap:wrap;gap:8px}.tag{background:#f3f5f8;border:1px solid #e8edf3;color:#34445e;padding:6px 10px;border-radius:8px;font-size:.81rem}
-.facts{display:grid;gap:12px}.fact{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:#43536a;overflow-wrap:anywhere}.symbol{width:29px;height:29px;flex:0 0 29px;display:grid;place-items:center;border-radius:9px;background:#f8f1e4;color:#8a6428;font-weight:800}.fact small{display:block;color:var(--muted);font-size:.73rem}
+.facts{display:grid;gap:12px}.fact{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:#43536a;overflow-wrap:anywhere}.symbol{width:29px;height:29px;flex:0 0 29px;display:grid;place-items:center;border-radius:9px;background:#f8f1e4;color:#8a6428;font-weight:800}.fact small{display:block;color:var(--muted);font-size:.73rem}.phone-number{direction:ltr;unicode-bidi:isolate;display:inline-block;text-align:left}
 .project{padding:12px 0;border-bottom:1px solid var(--line)}.project:last-child{border:0;padding-bottom:0}.project strong{display:block;color:#293a55;font-size:.9rem}.project span{color:var(--muted);font-size:.81rem}
 .education{display:grid;gap:11px}.education div{font-size:.86rem;color:#43536a}.education strong{display:block;color:#293a55}
 .footer{text-align:center;color:#7b8798;font-size:.78rem;padding:22px 0 0}.footer b{color:#a17b3e}
@@ -91,7 +89,7 @@ function render(lang){
  </section><aside>
   <article class="panel"><h2>${t.contact}</h2><div class="facts">
    <div class="fact"><div class="symbol">⌖</div><div><small>${t.location}</small>${t.city}</div></div>
-   <div class="fact"><div class="symbol">☎</div><div><small>${t.phone}</small><a href="tel:+213773375427">0773 37 54 27</a><br><a href="tel:+213552657078">0552 65 70 78</a></div></div>
+   <div class="fact"><div class="symbol">☎</div><div><small>${t.phone}</small><bdi dir="ltr" class="phone-number"><a href="tel:+213773375427">0773 37 54 27</a></bdi><br><bdi dir="ltr" class="phone-number"><a href="tel:+213552657078">0552 65 70 78</a></bdi></div></div>
    <div class="fact"><div class="symbol">@</div><div><small>${t.mail}</small><a href="mailto:rekabrayen@gmail.com">rekabrayen@gmail.com</a></div></div>
   </div></article>
   <article class="panel"><h2>${t.skills}</h2><div class="tags">${skills}</div></article>
@@ -105,8 +103,4 @@ function render(lang){
 render("fr");
 </script>
 </body>
-</html>'''
-
-path = Path("/mnt/data/carte_professionnelle_rekab_abdelkader_multilingue.html")
-path.write_text(html, encoding="utf-8")
-print(f"تم إنشاء النسخة متعددة اللغات: {path}")
+</html>
