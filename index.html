@@ -1,0 +1,112 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Carte professionnelle multilingue de Rekab Abdelkader">
+<title>Rekab Abdelkader | Professional Profile</title>
+<style>
+:root{--navy:#101d35;--navy2:#1b3154;--gold:#d7ad62;--gold2:#f2d9a5;--ink:#1c2940;--muted:#64748b;--paper:#f4f6fa;--line:#e5eaf1}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 8% 5%,#d7ad6220,transparent 25rem),var(--paper);font-family:Inter,"Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);line-height:1.65}
+.wrap{width:min(1080px,calc(100% - 30px));margin:28px auto 45px}.hero{position:relative;overflow:hidden;border-radius:25px;background:linear-gradient(125deg,var(--navy),var(--navy2));color:white;padding:38px;box-shadow:0 24px 60px #101d352e}
+.hero:after{content:"";position:absolute;width:330px;height:330px;border:1px solid #f2d9a540;border-radius:50%;right:-110px;top:-155px;box-shadow:0 0 0 32px #f2d9a509,0 0 0 68px #f2d9a506}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;position:relative;z-index:2}.brand{color:var(--gold2);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;font-weight:800}
+.langs{display:flex;gap:7px;flex-wrap:wrap}.lang{border:1px solid #ffffff55;color:white;background:#ffffff0b;padding:7px 12px;border-radius:9px;cursor:pointer;font-weight:700}.lang.active,.lang:hover{background:var(--gold);border-color:var(--gold);color:#17243a}
+.hero-main{display:grid;grid-template-columns:1fr auto;align-items:center;gap:28px;margin-top:38px;position:relative;z-index:1}.eyebrow{color:var(--gold2);text-transform:uppercase;letter-spacing:.13em;font-size:.78rem;font-weight:700}
+h1{font-size:clamp(2.2rem,6vw,3.9rem);line-height:1.12;margin:10px 0;letter-spacing:-.035em}.role{font-size:clamp(1rem,2vw,1.22rem);color:#e2e8f0}.years{width:135px;height:135px;border:1px solid #f2d9a580;border-radius:50%;display:grid;place-content:center;text-align:center;background:#ffffff08}.years strong{display:block;color:var(--gold2);font-size:2.2rem;line-height:1.2}.years span{font-size:.7rem;color:#e2e8f0;text-transform:uppercase;letter-spacing:.07em}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px;position:relative;z-index:2}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 15px;border-radius:10px;font-weight:700;font-size:.88rem;cursor:pointer;border:1px solid transparent;transition:.2s}.btn:hover{transform:translateY(-2px)}.gold{background:var(--gold);color:#17243a}.outline{border-color:#ffffff55;color:white;background:#ffffff09}
+.layout{display:grid;grid-template-columns:1.45fr .85fr;gap:20px;margin-top:20px}.panel{background:white;border:1px solid var(--line);border-radius:19px;padding:24px;box-shadow:0 8px 26px #192a460b}.panel+.panel{margin-top:20px}
+h2{font-size:1.1rem;margin:0 0 16px;color:var(--navy);display:flex;align-items:center;gap:10px}h2:before{content:"";width:4px;height:19px;border-radius:5px;background:var(--gold)}p{margin:0;color:#526176}
+.timeline{display:grid;gap:17px}.item{border-inline-start:2px solid #ead9b8;padding-inline-start:16px;position:relative}.item:before{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:var(--gold);inset-inline-start:-5.5px;top:7px}.item h3{margin:0;color:#22324c;font-size:.96rem}.meta{color:var(--muted);font-size:.81rem;margin:3px 0 6px}.item p{font-size:.88rem}
+.tags{display:flex;flex-wrap:wrap;gap:8px}.tag{background:#f3f5f8;border:1px solid #e8edf3;color:#34445e;padding:6px 10px;border-radius:8px;font-size:.81rem}
+.facts{display:grid;gap:12px}.fact{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:#43536a;overflow-wrap:anywhere}.symbol{width:29px;height:29px;flex:0 0 29px;display:grid;place-items:center;border-radius:9px;background:#f8f1e4;color:#8a6428;font-weight:800}.fact small{display:block;color:var(--muted);font-size:.73rem}
+.project{padding:12px 0;border-bottom:1px solid var(--line)}.project:last-child{border:0;padding-bottom:0}.project strong{display:block;color:#293a55;font-size:.9rem}.project span{color:var(--muted);font-size:.81rem}
+.education{display:grid;gap:11px}.education div{font-size:.86rem;color:#43536a}.education strong{display:block;color:#293a55}
+.footer{text-align:center;color:#7b8798;font-size:.78rem;padding:22px 0 0}.footer b{color:#a17b3e}
+[dir=rtl] body{font-family:Tahoma,"Segoe UI",Arial,sans-serif}[dir=rtl] .brand{letter-spacing:0}[dir=rtl] h1{letter-spacing:0}
+@media(max-width:740px){.wrap{width:calc(100% - 18px);margin:9px auto 25px}.hero{padding:23px 19px;border-radius:19px}.hero-main{grid-template-columns:1fr;margin-top:28px;gap:18px}.years{width:100px;height:100px}.years strong{font-size:1.8rem}.layout{grid-template-columns:1fr;gap:13px;margin-top:13px}.panel{padding:20px}.panel+.panel{margin-top:13px}.toolbar{align-items:flex-start;flex-direction:column}.actions .btn{flex:1 1 auto}}
+@media print{body{background:white}.wrap{width:100%;margin:0}.hero,.panel{box-shadow:none;break-inside:avoid}.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}.actions .outline{display:none}.layout{gap:10px}.panel{padding:16px}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script>
+const content = {
+fr:{
+brand:"PROFIL PROFESSIONNEL · ALGÉRIE",eyebrow:"Carte professionnelle numérique",role:"Chef de Service Facturation | Gestion des Stocks & Logistique",years:"ans d'expérience",
+call:"☎ Appeler",whatsapp:"WhatsApp",emailBtn:"✉ E-mail",pdf:"⤓ Enregistrer en PDF",
+about:"À propos",aboutText:"Professionnel de la gestion du transport et de la logistique dans le secteur des céréales et des légumineuses, actuellement Chef de Service Facturation. Expérience en gestion des stocks, saisie et analyse de données opérationnelles et financières, suivi des écarts et élaboration d'indicateurs de performance (KPI). Je développe également des solutions numériques et des systèmes centralisés de type ERP pour soutenir la gestion administrative et opérationnelle.",
+experience:"Expérience professionnelle",trainer:"Formateur en informatique et gestion",iqraa:"Institut privé de formation professionnelle Iqraa · 2025 – Aujourd'hui",trainerText:"Formation en Excel, Word, PowerPoint, gestion des ressources humaines et gestion des stocks.",chief:"Chef de Service Facturation",current:"Coopératives de transport de céréales et légumineuses du Centre · 2014 – Aujourd'hui",chiefText:"Suivi des factures et des anomalies, calcul du chiffre d'affaires mensuel et annuel des chauffeurs et camions, communication avec les partenaires et archivage documentaire.",stock:"Gestionnaire de stocks",stockDate:"Coopératives de transport de céréales et légumineuses du Centre · 2011 – 2014",stockText:"Suivi des pièces de rechange, achats et ventes, inventaires mensuels et annuels.",data:"Agent de saisie de données",dataDate:"Coopératives de transport de céréales et légumineuses du Centre · 2010 – 2011",dataText:"Saisie, traitement et contrôle précis des données et transactions.",
+projects:"Projets numériques",fuel:"Système de suivi de la consommation de carburant",fuelText:"PHP · HTML — Suivi de la consommation des camions et contrôle des écarts.",billing:"Programme de gestion des factures",billingText:"PHP · HTML — Automatisation du suivi des factures, détection des anomalies et rapports.",hr:"Gestion des établissements et des employés",hrText:"Delphi — Application Desktop de gestion des ressources humaines.",erp:"ERP interne de transport et de gestion du personnel",erpText:"MySQL/MariaDB · PHP · Java · CSS — Base centralisée, modules RH et indicateurs d'aide à la décision.",
+contact:"Coordonnées",location:"Localisation",city:"Aïn Defla, Algérie",phone:"Téléphone",mail:"E-mail",skills:"Compétences",education:"Formation",master:"Master en Économie et Gestion des Entreprises",masterText:"Université Djilali Bounaama, Khemis Miliana · 2018–2020",licence:"Licence en Sciences Économiques",licenceText:"Spécialité Banques et Monnaie Financière",scf:"Certificat en Système Comptable Financier (SCF)",itcert:"Formation professionnelle en informatique",bac:"Baccalauréat – Sciences de la Nature et de la Vie",languages:"Langues",arabic:"Arabe",french:"Français",english:"Anglais",skillsList:["Gestion des stocks","Logistique","Facturation","Analyse KPI","Analyse financière","ERP","SQL","HTML / CSS","PHP","Java","Delphi","Excel","Outils IA"],footer:"Carte professionnelle numérique"
+},
+en:{
+brand:"PROFESSIONAL PROFILE · ALGERIA",eyebrow:"Digital Business Card",role:"Billing Department Manager | Inventory & Logistics Management",years:"years of experience",
+call:"☎ Call",whatsapp:"WhatsApp",emailBtn:"✉ Email",pdf:"⤓ Save as PDF",
+about:"About Me",aboutText:"A professional in transport and logistics management within the cereals and dry legumes sector, currently serving as Billing Department Manager. Experienced in inventory management, data entry, operational and financial data analysis, variance monitoring, and performance indicators (KPIs). I also develop digital solutions and centralized ERP-type systems to support administrative and operational management.",
+experience:"Professional Experience",trainer:"IT & Management Trainer",iqraa:"Iqraa Private Vocational Training Institute · 2025 – Present",trainerText:"Training in Excel, Word, PowerPoint, human resources management, and inventory management.",chief:"Billing Department Manager",current:"Central Cereals and Legumes Transport Cooperatives · 2014 – Present",chiefText:"Invoice processing and discrepancy tracking, monthly and annual revenue reporting for drivers and trucks, partner communication, and document archiving.",stock:"Inventory Manager",stockDate:"Central Cereals and Legumes Transport Cooperatives · 2011 – 2014",stockText:"Spare parts monitoring, purchasing and sales follow-up, and monthly and annual stocktaking.",data:"Data Entry Clerk",dataDate:"Central Cereals and Legumes Transport Cooperatives · 2010 – 2011",dataText:"Accurate data entry, processing, and transaction checking.",
+projects:"Digital Projects",fuel:"Fuel Consumption Monitoring System",fuelText:"PHP · HTML — Truck fuel consumption tracking and variance monitoring.",billing:"Invoice Management Program",billingText:"PHP · HTML — Automated invoice tracking, anomaly detection, and reporting.",hr:"Organization & Employee Management System",hrText:"Delphi — Desktop application for human resources and employee data management.",erp:"Internal Transport & Workforce ERP System",erpText:"MySQL/MariaDB · PHP · Java · CSS — Centralized database, HR modules, and management decision-support indicators.",
+contact:"Contact Details",location:"Location",city:"Aïn Defla, Algeria",phone:"Phone",mail:"Email",skills:"Skills",education:"Education",master:"Master's Degree in Economics and Business Management",masterText:"Djilali Bounaama University, Khemis Miliana · 2018–2020",licence:"Bachelor's Degree in Economics",licenceText:"Specialization in Banking and Monetary Finance",scf:"Financial Accounting System (SCF) Certificate",itcert:"Vocational Certificate in IT",bac:"Baccalaureate – Natural and Life Sciences",languages:"Languages",arabic:"Arabic",french:"French",english:"English",skillsList:["Inventory Management","Logistics","Billing","KPI Analysis","Financial Analysis","ERP","SQL","HTML / CSS","PHP","Java","Delphi","Excel","AI Tools"],footer:"Digital Professional Profile"
+},
+ar:{
+brand:"الملف المهني · الجزائر",eyebrow:"بطاقة مهنية رقمية",role:"رئيس مصلحة الفوترة | تسيير المخزونات واللوجستيك",years:"سنة خبرة",
+call:"☎ اتصال",whatsapp:"واتساب",emailBtn:"✉ البريد الإلكتروني",pdf:"⤓ حفظ بصيغة PDF",
+about:"نبذة تعريفية",aboutText:"محترف في تسيير النقل واللوجستيك في قطاع الحبوب والبقول الجافة، أشغل حالياً منصب رئيس مصلحة الفوترة. أمتلك خبرة في تسيير المخزونات، إدخال وتحليل البيانات التشغيلية والمالية، متابعة الفوارق وإعداد مؤشرات الأداء. كما أعمل على تطوير حلول رقمية وأنظمة مركزية من نوع ERP لدعم التسيير الإداري والعملياتي.",
+experience:"الخبرة المهنية",trainer:"مكوّن في الإعلام الآلي والتسيير",iqraa:"معهد إقرأ الخاص للتكوين المهني · 2025 – إلى اليوم",trainerText:"التكوين في Excel وWord وPowerPoint وتسيير الموارد البشرية والمخزونات.",chief:"رئيس مصلحة الفوترة",current:"التعاونيات الجهوية لنقل الحبوب والبقول الجافة للوسط · 2014 – إلى اليوم",chiefText:"متابعة الفواتير ومعالجة الاختلالات، إعداد رقم الأعمال الشهري والسنوي للسائقين والشاحنات، التواصل مع الشركاء وأرشفة الوثائق.",stock:"مسير مخزونات",stockDate:"التعاونيات الجهوية لنقل الحبوب والبقول الجافة للوسط · 2011 – 2014",stockText:"متابعة قطع الغيار والمشتريات والمبيعات وإنجاز الجرد الشهري والسنوي.",data:"عون إدخال البيانات",dataDate:"التعاونيات الجهوية لنقل الحبوب والبقول الجافة للوسط · 2010 – 2011",dataText:"إدخال البيانات ومعالجتها ومراقبة المعاملات بدقة.",
+projects:"المشاريع الرقمية",fuel:"نظام متابعة استهلاك الوقود",fuelText:"PHP · HTML — متابعة استهلاك الشاحنات ومراقبة الفوارق.",billing:"برنامج تسيير الفواتير",billingText:"PHP · HTML — أتمتة متابعة الفواتير واكتشاف الاختلالات وإعداد التقارير.",hr:"برنامج تسيير المؤسسات والموظفين",hrText:"Delphi — تطبيق مكتبي لتسيير الموارد البشرية وبيانات الموظفين.",erp:"نظام ERP داخلي لتسيير النقل والموارد البشرية",erpText:"MySQL/MariaDB · PHP · Java · CSS — قاعدة بيانات مركزية ووحدات للموارد البشرية ومؤشرات لدعم اتخاذ القرار.",
+contact:"معلومات الاتصال",location:"الموقع",city:"عين الدفلى، الجزائر",phone:"الهاتف",mail:"البريد الإلكتروني",skills:"المهارات",education:"التكوين والشهادات",master:"ماستر في الاقتصاد وتسيير المؤسسات",masterText:"جامعة الجيلالي بونعامة، خميس مليانة · 2018–2020",licence:"ليسانس في العلوم الاقتصادية",licenceText:"تخصص نقود وبنوك ومالية",scf:"شهادة في النظام المحاسبي المالي SCF",itcert:"شهادة تكوين مهني في الإعلام الآلي",bac:"شهادة البكالوريا – علوم الطبيعة والحياة",languages:"اللغات",arabic:"العربية",french:"الفرنسية",english:"الإنجليزية",skillsList:["تسيير المخزونات","اللوجستيك","الفوترة","تحليل مؤشرات الأداء","التحليل المالي","ERP","SQL","HTML / CSS","PHP","Java","Delphi","Excel","أدوات الذكاء الاصطناعي"],footer:"بطاقة مهنية رقمية"
+}};
+function render(lang){
+ const t=content[lang], rtl=lang==="ar";
+ document.documentElement.lang=lang;document.documentElement.dir=rtl?"rtl":"ltr";
+ document.title="Rekab Abdelkader | "+(lang==="ar"?"بطاقة مهنية":lang==="fr"?"Carte professionnelle":"Professional Profile");
+ const skills=t.skillsList.map(x=>`<span class="tag">${x}</span>`).join("");
+ document.getElementById("app").innerHTML=`
+ <header class="hero">
+  <div class="toolbar"><div class="brand">${t.brand}</div><div class="langs">
+   <button class="lang ${lang==="fr"?"active":""}" onclick="render('fr')">FR</button>
+   <button class="lang ${lang==="en"?"active":""}" onclick="render('en')">EN</button>
+   <button class="lang ${lang==="ar"?"active":""}" onclick="render('ar')">عربي</button>
+  </div></div>
+  <div class="hero-main"><div><div class="eyebrow">${t.eyebrow}</div><h1>Rekab Abdelkader</h1><div class="role">${t.role}</div></div>
+  <div class="years"><div><strong>15+</strong><span>${t.years}</span></div></div></div>
+  <div class="actions"><a class="btn gold" href="tel:+213773375427">${t.call}</a><a class="btn outline" href="https://wa.me/213773375427" target="_blank" rel="noopener">${t.whatsapp}</a><a class="btn outline" href="mailto:rekabrayen@gmail.com">${t.emailBtn}</a><button class="btn outline" onclick="window.print()">${t.pdf}</button></div>
+ </header>
+ <div class="layout"><section>
+  <article class="panel"><h2>${t.about}</h2><p>${t.aboutText}</p></article>
+  <article class="panel"><h2>${t.experience}</h2><div class="timeline">
+   <div class="item"><h3>${t.trainer}</h3><div class="meta">${t.iqraa}</div><p>${t.trainerText}</p></div>
+   <div class="item"><h3>${t.chief}</h3><div class="meta">${t.current}</div><p>${t.chiefText}</p></div>
+   <div class="item"><h3>${t.stock}</h3><div class="meta">${t.stockDate}</div><p>${t.stockText}</p></div>
+   <div class="item"><h3>${t.data}</h3><div class="meta">${t.dataDate}</div><p>${t.dataText}</p></div>
+  </div></article>
+  <article class="panel"><h2>${t.projects}</h2>
+   <div class="project"><strong>${t.fuel}</strong><span>${t.fuelText}</span></div>
+   <div class="project"><strong>${t.billing}</strong><span>${t.billingText}</span></div>
+   <div class="project"><strong>${t.hr}</strong><span>${t.hrText}</span></div>
+   <div class="project"><strong>${t.erp}</strong><span>${t.erpText}</span></div>
+  </article>
+ </section><aside>
+  <article class="panel"><h2>${t.contact}</h2><div class="facts">
+   <div class="fact"><div class="symbol">⌖</div><div><small>${t.location}</small>${t.city}</div></div>
+   <div class="fact"><div class="symbol">☎</div><div><small>${t.phone}</small><a href="tel:+213773375427">0773 37 54 27</a><br><a href="tel:+213552657078">0552 65 70 78</a></div></div>
+   <div class="fact"><div class="symbol">@</div><div><small>${t.mail}</small><a href="mailto:rekabrayen@gmail.com">rekabrayen@gmail.com</a></div></div>
+  </div></article>
+  <article class="panel"><h2>${t.skills}</h2><div class="tags">${skills}</div></article>
+  <article class="panel"><h2>${t.education}</h2><div class="education">
+   <div><strong>${t.master}</strong>${t.masterText}</div><div><strong>${t.licence}</strong>${t.licenceText}</div>
+   <div><strong>${t.scf}</strong>2013</div><div><strong>${t.itcert}</strong>2005</div><div><strong>${t.bac}</strong>2002</div>
+  </div></article>
+  <article class="panel"><h2>${t.languages}</h2><div class="tags"><span class="tag">${t.arabic}</span><span class="tag">${t.french}</span><span class="tag">${t.english}</span></div></article>
+ </aside></div><footer class="footer">© ${new Date().getFullYear()} <b>Rekab Abdelkader</b> · ${t.footer}</footer>`;
+}
+render("fr");
+</script>
+</body>
+</html>'''
+
+path = Path("/mnt/data/carte_professionnelle_rekab_abdelkader_multilingue.html")
+path.write_text(html, encoding="utf-8")
+print(f"تم إنشاء النسخة متعددة اللغات: {path}")
